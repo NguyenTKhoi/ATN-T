@@ -1,6 +1,6 @@
 <?php 
 
-include 'config.php';
+include 'database/db.php';
 
 error_reporting(0);
 
@@ -18,11 +18,11 @@ if (isset($_POST['submit'])) {
 
 	if ($password == $cpassword) {
 		$sql = "SELECT * FROM users WHERE email='$email'";
-		$result = mysqli_query($conn, $sql);
+		$result = pg_connect($db, $sql);
 		if (!$result->num_rows > 0) {
 			$sql = "INSERT INTO users (username, email, password)
 					VALUES ('$username', '$email', '$password')";
-			$result = mysqli_query($conn, $sql);
+			$result = pg_connect($db, $sql);
 			if ($result) {
 				echo "<script>alert('Wow! User Registration Completed.')</script>";
 				$username = "";
@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 	<title>Register Form - Pure Coding</title>
 </head>
