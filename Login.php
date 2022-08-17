@@ -1,13 +1,13 @@
 <?php 
 
-include 'config.php';
+include 'database/db.php';
 
 session_start();
 
 error_reporting(0);
 
 if (isset($_SESSION['username'])) {
-    header("Location: welcome.php");
+    header("Location: index.php");
 }
 
 if (isset($_POST['submit'])) {
@@ -15,11 +15,11 @@ if (isset($_POST['submit'])) {
 	$password = md5($_POST['password']);
 
 	$sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
-	$result = mysqli_query($conn, $sql);
+	$result = pg_connect($db, $sql);
 	if ($result->num_rows > 0) {
 		$row = mysqli_fetch_assoc($result);
 		$_SESSION['username'] = $row['username'];
-		header("Location: welcome.php");
+		header("Location: index.php");
 	} else {
 		echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
 	}
@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 	<title>Login Form - Pure Coding</title>
 </head>
