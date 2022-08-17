@@ -15,9 +15,9 @@ if (isset($_POST['submit'])) {
 	$password = md5($_POST['password']);
 
 	$sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
-	$result = mysqli_query($db, $sql);
+	$result = pg_query($db, $sql);
 	if ($result->num_rows > 0) {
-		$row = mysqli_fetch_assoc($result);
+		$row = pg_fetch_assoc($result);
 		$_SESSION['username'] = $row['username'];
 		header("Location: welcome.php");
 	} else {
