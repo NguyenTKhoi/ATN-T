@@ -16,13 +16,25 @@ if (isset($_POST['submit'])) {
 
 	$sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
 	$result = pg_query($db, $sql);
-	if ($result->num_rows > 0) {
-		$row = pg_fetch_assoc($result);
-		$_SESSION['username'] = $row['username'];
-		header("Location: index.php");
-	} else {
-		echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+	$run_customer = pg_query($db,$result);
+	if ($run_customer==0) {
+		echo "<script>alert('Your email or password is wrong')</script>";
+        exit();
 	}
+	if($check_customer==1){
+        
+        $_SESSION['email']=$email;
+        
+       echo "<script>alert('You are Logged in')</script>"; 
+        
+        
+    }else{
+        
+        $_SESSION['email']=$email;
+        
+       echo "<script>alert('You are Logged in')</script>"; 
+        
+    }
 }
 
 ?>
