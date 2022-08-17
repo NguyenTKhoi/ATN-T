@@ -16,8 +16,8 @@ if (isset($_POST['submit'])) {
 
 	$sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
 	$result = pg_query($db, $sql);
-	$run_customer = pg_query($db,$result);
-	if ($run_customer==0) {
+	$check_customer = pg_num_rows($result);
+	if ($result==0) {
 		echo "<script>alert('Your email or password is wrong')</script>";
         exit();
 	}
