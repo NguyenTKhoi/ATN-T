@@ -30,9 +30,7 @@ if (isset($_POST['submit'])) {
         
     }else{
         
-        $_SESSION['email']=$email;
-        
-       echo "<script>alert('You are Logged in')</script>"; 
+       echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
         
     }
 }
